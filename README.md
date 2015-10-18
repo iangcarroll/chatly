@@ -1,5 +1,5 @@
 # Chatly
-A modular chatbot written in PHP.
+A sarcastically-named, modular chatbot written in PHP.
 
 ## Features
 * Eloquent + SQLite for persistent data
