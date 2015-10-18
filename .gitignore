@@ -3,3 +3,4 @@ config.yml
 /vendor/
 .env
 src/App/Responder/ResponderKernel.php
+migrations/Kernel.php
