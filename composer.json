@@ -23,6 +23,6 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "": "src/", "App\\Migration\\": "database/migrations/" }
+        "psr-4": { "": "src/", "App\\Migration\\": "migrations/" }
     }
 }

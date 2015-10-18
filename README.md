@@ -14,4 +14,4 @@ Copy the `.env.example` file to `.env` and fill in the variables. They should be
 To start processing messages, run `php chat.php listen`.
 
 ## External Responders
-Responders (commands that can be executed in Slack) can be installed via a simple `composer require user/package`. Then just add the class that extends `App\Responder\Responder` to the `$responders` array in `src/App/Responder/Kernel.php`. Composer will take care of the autoloading.
+Responders (commands that can be executed in Slack) can be installed via a simple `composer require user/package`. Then just add the class that extends `App\Responder\Responder` to the `$responders` array in `src/App/Responder/Kernel.php`. Composer will take care of the autoloading. If an external responder has migrations, you will need to add their classes to `migrations/Kernel.php`.

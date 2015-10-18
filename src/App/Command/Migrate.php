@@ -1,7 +1,7 @@
 <?php
 namespace App\Command;
 
-use App\Migration\Kernel as CommandKernel;
+use App\Migration\Kernel as MigrationsKernel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,7 +14,7 @@ class Migrate extends Command
   {
     $this->setName('migrate')
          ->setDescription('Migrate the database.');
-    $this->kernel = new CommandKernel;
+    $this->kernel = new MigrationsKernel;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output)
