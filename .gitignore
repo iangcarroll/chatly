@@ -1,0 +1,4 @@
+config.yml
+.idea
+/vendor/
+.env

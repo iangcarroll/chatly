@@ -1,0 +1,28 @@
+{
+    "name": "ian/chatly",
+    "description": "A revolution.",
+    "type": "project",
+    "require": {
+        "symfony/console": "^2.7",
+        "illuminate/database": "^5.1",
+        "symfony/filesystem": "^2.7",
+        "guzzlehttp/guzzle": "~6.0",
+        "aws/aws-sdk-php": "^3.4",
+        "doctrine/cache": "^1.4",
+        "symfony/var-dumper": "^2.7",
+        "pixeloution/true-random": "^1.0",
+        "vlucas/phpdotenv": "^2.0",
+        "raven/raven": "^0.13.0"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Ian Carroll",
+            "email": "ian@ian.sh"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "": "src/", "App\\Migration\\": "database/migrations/" }
+    }
+}
