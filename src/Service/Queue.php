@@ -39,7 +39,7 @@ class Queue
       ));
       $message = $result["Messages"]["0"]["Body"];
       if (! $message) {
-
+        return;
       }
 
       $message = json_decode($message, True);
