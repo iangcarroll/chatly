@@ -15,7 +15,7 @@ if (! $fs->exists($path)) {
   try {
       $fs->touch($path);
   } catch (IOExceptionInterface $e) {
-      throw new RuntimeException("Error creating a database at " . $pathh);
+      throw new RuntimeException("Error creating a database at " . $path);
   }
 }
 $capsule->addConnection([
