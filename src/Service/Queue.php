@@ -79,7 +79,7 @@ class Queue
       }
     }
 
-    private function shouldInvokeBot(string $message)
+    private function shouldInvokeBot($message)
     {
       $message = strtolower($message);
 
