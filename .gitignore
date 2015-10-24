@@ -2,5 +2,6 @@ config.yml
 .idea
 /vendor/
 .env
-src/App/Responder/ResponderKernel.php
+src/App/Responder
+!src/app/Responder/ResponderKernel.php
 migrations/Kernel.php
