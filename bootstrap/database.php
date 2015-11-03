@@ -11,7 +11,7 @@ if (getenv("DATABASE_URL")) {
     $url = parse_url(getenv("DATABASE_URL"));
     $capsule->addConnection([
         'driver'    => 'pgsql',
-        'database'  => $url["path"],
+        'database'  => substr($url["path"], 1),
         'username'  => $url["user"],
         'password'  => $url["pass"],
         'host'      => $url["host"],
