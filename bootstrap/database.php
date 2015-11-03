@@ -15,7 +15,8 @@ if (getenv("DATABASE_URL")) {
         'username'  => $url["user"],
         'password'  => $url["pass"],
         'host'      => $url["host"],
-        'port'      => $url["port"]
+        'port'      => $url["port"],
+        'charset'   => 'UTF8'
     ]);
 } else {
     $path = getenv("HOME") . '/.chatly-data/chatly.sqlite';
