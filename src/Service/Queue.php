@@ -63,6 +63,11 @@ class Queue
           "ReceiptHandle" => $result["Messages"][0]["ReceiptHandle"],
       ]);
     }
+    
+    public function wait($seconds = 10)
+    {
+        sleep($seconds);
+    }
 
     private function command(Message $entry)
     {
