@@ -62,6 +62,8 @@ class Queue
           "QueueUrl" => $this->url,
           "ReceiptHandle" => $result["Messages"][0]["ReceiptHandle"],
       ]);
+      
+      $this->wait();
     }
     
     public function wait($seconds = 10)
