@@ -1,7 +1,7 @@
 <?php
+
 namespace Service;
 
-use Config;
 use GuzzleHttp\Client;
 
 class Sentry
@@ -11,14 +11,14 @@ class Sentry
 
     public function __construct()
     {
-      $this->client = new \Raven_Client($this->dsn);
+        $this->client = new \Raven_Client($this->dsn);
     }
 
     public function registerHandler()
     {
-      $error_handler = new \Raven_ErrorHandler($this->client);
-      $error_handler->registerExceptionHandler();
-      $error_handler->registerErrorHandler();
-      $error_handler->registerShutdownFunction();
+        $error_handler = new \Raven_ErrorHandler($this->client);
+        $error_handler->registerExceptionHandler();
+        $error_handler->registerErrorHandler();
+        $error_handler->registerShutdownFunction();
     }
 }

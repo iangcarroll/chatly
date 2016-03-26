@@ -6,6 +6,6 @@ class Kernel
 {
     public $commands = [
         Migrate::class,
-        Listen::class
+        Listen::class,
     ];
 }
