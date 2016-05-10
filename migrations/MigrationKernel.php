@@ -24,8 +24,9 @@ class MigrationKernel
         foreach ($this->migrations as $migration) {
             $migration = new $migration();
 
-            if (count(Migration::where('name', get_class($migration))->get()) === 0) {
+            if (Migration::where('name', get_class($migration))->count() === 0) {
                 $migration->up();
+                
                 $this->migrated($migration, $output);
             }
         }
