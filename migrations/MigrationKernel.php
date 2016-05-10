@@ -17,10 +17,13 @@ class MigrationKernel
     {
         if (!Capsule::schema()->hasTable('migrations')) {
             $migrations = new MigrationMigration();
+            
             $migrations->up();
         }
+        
         foreach ($this->migrations as $migration) {
             $migration = new $migration();
+
             if (count(Migration::where('name', get_class($migration))->get()) === 0) {
                 $migration->up();
                 $this->migrated($migration, $output);
@@ -30,9 +33,12 @@ class MigrationKernel
 
     private function migrated($class, $output)
     {
+        $class = get_class($class);
+        
         $output->writeln('Migrated '.get_class($class).'.');
-        $migration = new Migration();
-        $migration->name = get_class($class);
-        $migration->save();
+        
+        Migration::create([
+            'name' => $class,
+        ]);
     }
 }
