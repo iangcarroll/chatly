@@ -15,12 +15,14 @@ class Migrate extends Command
     {
         $this->setName('migrate')
          ->setDescription('Migrate the database.');
+
         $this->kernel = new MigrationsKernel();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Migrating database...');
+        
         $this->kernel->migrate($output);
     }
 }
