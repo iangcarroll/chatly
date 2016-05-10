@@ -36,7 +36,7 @@ class MigrationKernel
     {
         $class = get_class($class);
         
-        $output->writeln('Migrated '.get_class($class).'.');
+        $output->writeln("Migrated {$class}.");
         
         Migration::create([
             'name' => $class,
