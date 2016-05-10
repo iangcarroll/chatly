@@ -20,14 +20,15 @@ class Queue
         $this->access = getenv('QUEUE_ACCESS_TOKEN');
         $this->secret = getenv('QUEUE_SECRET_TOKEN');
         $this->region = getenv('QUEUE_REGION');
+        
         $this->sqs = SqsClient::factory([
-        'credentials' => [
-            'key'     => $this->access,
-            'secret'  => $this->secret,
-        ],
-        'region'  => $this->region,
-        'version' => 'latest',
-      ]);
+            'credentials' => [
+                'key'     => $this->access,
+                'secret'  => $this->secret,
+            ],
+            'region'  => $this->region,
+            'version' => 'latest',
+        ]);
     }
 
     public function work()
@@ -35,8 +36,10 @@ class Queue
         $result = $this->sqs->receiveMessage([
           'QueueUrl'        => $this->url,
           'WaitTimeSeconds' => 10,
-      ]);
+        ]);
+        
         $message = $result['Messages']['0']['Body'];
+        
         if (!$message) {
             return;
         }
@@ -46,12 +49,12 @@ class Queue
         if ($message['user_name'] == 'slackbot') {
             return;
         }
-
-        $entry = new Message();
-        $entry->text = $message['text'];
-        $entry->user = $message['user_name'];
-        $entry->channel = $message['channel_name'];
-        $entry->save();
+        
+        $entry = Message::create([
+            'text' => $message['text'],
+            'user' => $message['user_name'],
+            'channel' => $message['channel_name'],
+        ]);
 
         if ($this->shouldInvokeBot($entry->text)) {
             $this->command($entry);
@@ -60,7 +63,7 @@ class Queue
         $this->sqs->deleteMessage([
           'QueueUrl'      => $this->url,
           'ReceiptHandle' => $result['Messages'][0]['ReceiptHandle'],
-      ]);
+        ]);
 
         $this->wait();
     }
@@ -72,16 +75,22 @@ class Queue
 
     private function command(Message $entry)
     {
-        $signature = trim($entry->text);
-        $signature = explode(' ', $entry->text);
+        $signature = explode(' ', trim($entry->text));
 
         array_shift($signature);
+        
         $command = trim(strtolower(trim($signature[0])), '?!.');
 
         $kernel = new ResponderKernel();
+        
         if ($kernel->has($command, $entry->channel)) {
             $responder = $kernel->responderForObject($command, $entry->channel);
-            $responder->run(['raw' => $signature, 'channel' => $entry->channel, 'user' => $entry->user]);
+
+            $responder->run([
+                'raw' => $signature,
+                'channel' => $entry->channel,
+                'user' => $entry->user
+            ]);
         }
     }
 
