@@ -2,8 +2,6 @@
 
 namespace App\Migration;
 
-
-
 class Kernel extends MigrationKernel
 {
     public $migrations = [
