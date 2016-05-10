@@ -6,8 +6,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 $capsule = new Capsule();
 $fs = new Filesystem();
+
 if (getenv('DATABASE_URL')) {
     $url = parse_url(getenv('DATABASE_URL'));
+    
     $capsule->addConnection([
         'driver'    => 'pgsql',
         'database'  => substr($url['path'], 1),
@@ -18,21 +20,27 @@ if (getenv('DATABASE_URL')) {
         'charset'   => 'UTF8',
     ]);
 } else {
-    $path = getenv('HOME').'/.chatly-data/chatly.sqlite';
-    if (!$fs->exists(getenv('HOME').'/.chatly-data')) {
-        $fs->mkdir(getenv('HOME').'/.chatly-data');
+    $directory = getenv('HOME').'/.chatly-data';
+    
+    $path = $directory.'/chatly.sqlite';
+    
+    if (!$fs->exists($directory)) {
+        $fs->mkdir($directory);
     }
+
     if (!$fs->exists($path)) {
         try {
             $fs->touch($path);
         } catch (IOExceptionInterface $e) {
-            throw new RuntimeException('Error creating a database at '.$path);
+            throw new RuntimeException("Error creating a database at {$path}.");
         }
     }
+    
     $capsule->addConnection([
       'driver'    => 'sqlite',
       'database'  => $path,
     ]);
 }
+
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
