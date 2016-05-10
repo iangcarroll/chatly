@@ -1,9 +1,10 @@
 <?php
 
+date_default_timezone_set('America/Detroit');
+
+/* Register our exception handler before everything else. */
 $sentry = new Service\Sentry();
 $sentry->registerHandler();
-
-date_default_timezone_set('America/Detroit');
 
 require __DIR__.'/database.php';
 
