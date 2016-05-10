@@ -20,10 +20,11 @@ class Listen extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Listening...');
+        
         $queue = new Queue();
+        
         while (true) {
-            /* The SQS client will wait for ten seconds if there are no immediately available messages, so we do not rate limit this call. */
-      $queue->work();
+            $queue->work();
         }
     }
 }
