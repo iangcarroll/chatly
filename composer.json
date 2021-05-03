@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "symfony/console": "^2.7",
-        "illuminate/database": "^5.1",
+        "illuminate/database": "^6.20",
         "symfony/filesystem": "^2.7",
         "guzzlehttp/guzzle": "~6.0",
         "aws/aws-sdk-php": "^3.4",
